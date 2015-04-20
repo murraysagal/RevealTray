@@ -46,6 +46,7 @@
 		7251D2391AE551BA00F062A1 /* TrayTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrayTransitionAnimator.m; sourceTree = "<group>"; };
 		7251D23B1AE571CE00F062A1 /* TrayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrayViewController.h; sourceTree = "<group>"; };
 		7251D23C1AE571CE00F062A1 /* TrayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrayViewController.m; sourceTree = "<group>"; };
+		7251D23E1AE5BA3100F062A1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,7 @@
 		7251D2061AE16E5E00F062A1 = {
 			isa = PBXGroup;
 			children = (
+				7251D23E1AE5BA3100F062A1 /* README.md */,
 				7251D2111AE16E5E00F062A1 /* RevealTray */,
 				7251D22B1AE16E5E00F062A1 /* RevealTrayTests */,
 				7251D2101AE16E5E00F062A1 /* Products */,
