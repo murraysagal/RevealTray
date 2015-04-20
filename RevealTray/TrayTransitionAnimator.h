@@ -10,5 +10,6 @@
 
 @interface TrayTransitionAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
+@property (nonatomic, assign, getter = isAppearing) BOOL appearing;
 
 @end

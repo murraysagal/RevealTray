@@ -8,12 +8,17 @@
 
 #import "TrayTransitionAnimator.h"
 
-NSTimeInterval const trayTransitionDuration = 1.0;
+NSTimeInterval const trayTransitionDurationPresent = 1.0;
+NSTimeInterval const trayTransitionDurationDismiss = 0.25;
 
 @implementation TrayTransitionAnimator
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    return trayTransitionDuration;
+    if (self.isAppearing) {
+        return trayTransitionDurationPresent;
+    } else {
+        return trayTransitionDurationDismiss;
+    }
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
@@ -21,24 +26,44 @@ NSTimeInterval const trayTransitionDuration = 1.0;
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *fromView = fromVC.view;
-    UIView *trayView = toVC.view;
-    UIView *containerView = [transitionContext containerView];
+    UIView *toView = toVC.view;
+    UIView *containerView = transitionContext.containerView;
 
-    CGFloat trayWidth = fromView.frame.size.width * 0.9; // trayWidth is how far fromView needs to slide over.
+    UIView *trayView;
+    CGFloat trayWidth;
     
-    CGFloat trayX = fromView.frame.size.width - trayWidth;
-    trayView.frame = CGRectMake(trayX, fromView.frame.origin.y, trayWidth, fromView.frame.size.height);
-    [containerView addSubview:trayView];
+    if (self.isAppearing) {
+        
+        trayView = toView; // When appearing toView is the tray.
+        trayWidth = fromView.frame.size.width * 0.9; // trayWidth is how far fromView needs to slide.
+        CGFloat trayX = fromView.frame.size.width - trayWidth;
+        trayView.frame = CGRectMake(trayX, fromView.frame.origin.y, trayWidth, fromView.frame.size.height);
+        [containerView addSubview:trayView];
+        
+        CGFloat fromViewXForReveal = fromView.frame.origin.x - trayWidth;
+        CGRect fromViewRectForReveal = CGRectMake(fromViewXForReveal, fromView.frame.origin.y, fromView.frame.size.width, fromView.frame.size.height);
+        [containerView addSubview:fromView]; // Must be added last so it's on top.
+        
+        [UIView animateWithDuration:[self transitionDuration:nil] animations:^{
+            fromView.frame = fromViewRectForReveal;
+        } completion:^(BOOL finished) {
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        }];
+        
+    } else {
+        
+        trayView = fromView; // When disappearing fromView is the tray.
+        trayWidth = trayView.frame.size.width;
 
-    CGFloat fromViewXForReveal = fromView.frame.origin.x - trayWidth;
-    CGRect fromViewRectForReveal = CGRectMake(fromViewXForReveal, fromView.frame.origin.y, fromView.frame.size.width, fromView.frame.size.height);
-    [containerView addSubview:fromView]; // Must be added last so it's on top.
-
-    [UIView animateWithDuration:trayTransitionDuration animations:^{
-        fromView.frame = fromViewRectForReveal;
-    } completion:^(BOOL finished) {
-        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-    }];
+        CGRect toViewOriginalFrame = CGRectMake(toView.frame.origin.x + trayWidth, toView.frame.origin.y, toView.frame.size.width, toView.frame.size.height);
+        [UIView animateWithDuration:[self transitionDuration:nil] animations:^{
+            toView.frame = toViewOriginalFrame;
+        } completion:^(BOOL finished) {
+            [fromView removeFromSuperview];
+            [[UIApplication sharedApplication].keyWindow addSubview:toView]; //
+            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        }];
+    }
 }
 
 @end

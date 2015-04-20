@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 #import "TrayTransitionAnimator.h"
+#import "TrayViewController.h"
 
-@interface ViewController () <UIViewControllerTransitioningDelegate>
+@interface ViewController () <UIViewControllerTransitioningDelegate, TrayViewControllerDelegate>
 
 @end
 
@@ -17,10 +18,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"RevealTraySegueIdentifier"]) {
-        UIViewController *toVC = segue.destinationViewController;
-        toVC.modalPresentationStyle = UIModalPresentationCustom;
-        toVC.transitioningDelegate = self;
-
+        TrayViewController *trayViewController = segue.destinationViewController;
+        trayViewController.modalPresentationStyle = UIModalPresentationCustom;
+        trayViewController.transitioningDelegate = self;
+        trayViewController.delegate = self;
     }
 }
 
@@ -28,6 +29,18 @@
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
     TrayTransitionAnimator *animator = [[TrayTransitionAnimator alloc] init];
+    animator.appearing = YES;
     return animator;
 }
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    TrayTransitionAnimator *animator = [[TrayTransitionAnimator alloc] init];
+    animator.appearing = NO;
+    return animator;
+}
+
+- (void)trayViewControllerDidFinish:(TrayViewController *)trayViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
