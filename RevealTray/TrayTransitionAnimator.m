@@ -23,10 +23,10 @@ NSTimeInterval const trayTransitionDurationDismiss = 0.25;
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     
-    UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    UIView *fromView = fromVC.view;
-    UIView *toView = toVC.view;
+    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIView *fromView = fromViewController.view;
+    UIView *toView = toViewController.view;
     UIView *containerView = transitionContext.containerView;
 
     UIView *trayView;
@@ -54,13 +54,13 @@ NSTimeInterval const trayTransitionDurationDismiss = 0.25;
         
         trayView = fromView; // When disappearing fromView is the tray.
         trayWidth = trayView.frame.size.width;
-
         CGRect toViewOriginalFrame = CGRectMake(toView.frame.origin.x + trayWidth, toView.frame.origin.y, toView.frame.size.width, toView.frame.size.height);
+    
         [UIView animateWithDuration:[self transitionDuration:nil] animations:^{
             toView.frame = toViewOriginalFrame;
         } completion:^(BOOL finished) {
             [fromView removeFromSuperview];
-            [[UIApplication sharedApplication].keyWindow addSubview:toView]; //
+            [[UIApplication sharedApplication].keyWindow addSubview:toView]; // Because it was added to containerView in the if().
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     }
