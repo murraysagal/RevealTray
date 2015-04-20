@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "TrayTransitionAnimator.h"
 
-@interface ViewController ()
+@interface ViewController () <UIViewControllerTransitioningDelegate>
 
 @end
 
@@ -16,7 +17,17 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"RevealTraySegueIdentifier"]) {
-        
+        UIViewController *toVC = segue.destinationViewController;
+        toVC.modalPresentationStyle = UIModalPresentationCustom;
+        toVC.transitioningDelegate = self;
+
     }
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+    TrayTransitionAnimator *animator = [[TrayTransitionAnimator alloc] init];
+    return animator;
 }
 @end

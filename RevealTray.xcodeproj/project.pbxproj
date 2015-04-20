@@ -14,6 +14,7 @@
 		7251D2201AE16E5E00F062A1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7251D21F1AE16E5E00F062A1 /* Images.xcassets */; };
 		7251D2231AE16E5E00F062A1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7251D2211AE16E5E00F062A1 /* LaunchScreen.xib */; };
 		7251D22F1AE16E5E00F062A1 /* RevealTrayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7251D22E1AE16E5E00F062A1 /* RevealTrayTests.m */; };
+		7251D23A1AE551BA00F062A1 /* TrayTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7251D2391AE551BA00F062A1 /* TrayTransitionAnimator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		7251D2281AE16E5E00F062A1 /* RevealTrayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RevealTrayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7251D22D1AE16E5E00F062A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7251D22E1AE16E5E00F062A1 /* RevealTrayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RevealTrayTests.m; sourceTree = "<group>"; };
+		7251D2381AE551BA00F062A1 /* TrayTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrayTransitionAnimator.h; sourceTree = "<group>"; };
+		7251D2391AE551BA00F062A1 /* TrayTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrayTransitionAnimator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				7251D2191AE16E5E00F062A1 /* ViewController.h */,
 				7251D21A1AE16E5E00F062A1 /* ViewController.m */,
 				7251D21C1AE16E5E00F062A1 /* Main.storyboard */,
+				7251D2381AE551BA00F062A1 /* TrayTransitionAnimator.h */,
+				7251D2391AE551BA00F062A1 /* TrayTransitionAnimator.m */,
 				7251D21F1AE16E5E00F062A1 /* Images.xcassets */,
 				7251D2211AE16E5E00F062A1 /* LaunchScreen.xib */,
 				7251D2121AE16E5E00F062A1 /* Supporting Files */,
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7251D21B1AE16E5E00F062A1 /* ViewController.m in Sources */,
+				7251D23A1AE551BA00F062A1 /* TrayTransitionAnimator.m in Sources */,
 				7251D2181AE16E5E00F062A1 /* AppDelegate.m in Sources */,
 				7251D2151AE16E5E00F062A1 /* main.m in Sources */,
 			);
@@ -416,6 +422,7 @@
 				7251D2341AE16E5E00F062A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7251D2351AE16E5E00F062A1 /* Build configuration list for PBXNativeTarget "RevealTrayTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +431,7 @@
 				7251D2371AE16E5E00F062A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
