@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FSb-ro-D3a">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
@@ -17,29 +17,42 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Mi-Hm-jWJ">
-                                <rect key="frame" x="277" y="285" width="79" height="30"/>
-                                <state key="normal" title="Reveal Tray">
+                                <rect key="frame" x="208" y="285" width="218" height="30"/>
+                                <state key="normal" title="Reveal Tray Modally with Segue">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="TaE-aR-TlX" kind="show" identifier="RevealTraySegueIdentifier" id="Zvf-XA-F4c"/>
+                                    <segue destination="TaE-aR-TlX" kind="presentation" identifier="RevealTraySegueIdentifier" id="Zvf-XA-F4c"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3b-tm-WNw">
+                                <rect key="frame" x="204" y="323" width="227" height="30"/>
+                                <state key="normal" title="Reveal Tray Modally with Present">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="revealTrayWithPresent" destination="vXZ-lx-hvc" eventType="touchUpInside" id="xt4-GF-tpj"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="h3b-tm-WNw" firstAttribute="top" secondItem="2Mi-Hm-jWJ" secondAttribute="bottom" constant="8" id="HJb-77-ofQ"/>
+                            <constraint firstItem="h3b-tm-WNw" firstAttribute="centerX" secondItem="2Mi-Hm-jWJ" secondAttribute="centerX" id="krd-Cn-w1q"/>
                             <constraint firstAttribute="centerX" secondItem="2Mi-Hm-jWJ" secondAttribute="centerX" constant="-16.5" id="wlH-uR-9yy"/>
                             <constraint firstAttribute="centerY" secondItem="2Mi-Hm-jWJ" secondAttribute="centerY" id="ySc-6k-QKI"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="t7H-7C-G6M"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1109" y="378"/>
         </scene>
         <!--Tray View Controller-->
         <scene sceneID="mWP-6W-5s8">
             <objects>
-                <viewController id="TaE-aR-TlX" customClass="TrayViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrayViewControllerStoryboardID" id="TaE-aR-TlX" customClass="TrayViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dKQ-7r-tY8"/>
                         <viewControllerLayoutGuide type="bottom" id="iDF-LD-TbN"/>
@@ -67,7 +80,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9hP-p6-LZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173" y="515"/>
+            <point key="canvasLocation" x="2200" y="435"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LBc-xn-mPq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSb-ro-D3a" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CN1-pe-pkO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="cGq-dZ-j6S"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rYo-Kw-tGL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-98" y="343"/>
         </scene>
     </scenes>
 </document>
